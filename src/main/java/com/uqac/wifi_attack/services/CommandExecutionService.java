@@ -32,10 +32,20 @@ public class CommandExecutionService {
         try {
             // 🔹 Extraction du script s'il est intégré dans le JAR
             Path scriptPath = extractScriptIfNeeded("bashAttack.sh");
+            logger.info(scriptPath.toString());
+            logger.info(essid);
+            logger.info(wordlistPath);
+
+            // 🔹 Vérification des arguments
+            if (essid == null || essid.isEmpty() || wordlistPath == null || wordlistPath.isEmpty()) {
+                throw new IllegalArgumentException("ESSID and dictionary path must not be null or empty");
+            }
 
             // 🔹 Construction sécurisée de la commande
-            List<String> command = Arrays.asList("sudo", "bash", scriptPath.toString(), essid, wordlistPath);
+            List<String> command = Arrays.asList("script", "-q", "-c", "sudo bash " + scriptPath.toString() + " \"" + essid + "\" " + wordlistPath);            logger.info(command.toString());
             ProcessBuilder processBuilder = new ProcessBuilder(command);
+            processBuilder.environment().put("COLUMNS", "80");
+            processBuilder.environment().put("LINES", "24");
             processBuilder.redirectErrorStream(true);
 
             // 🔹 Exécution du processus

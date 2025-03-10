@@ -31,7 +31,7 @@ public class CommandExecutionController {
     @RequestMapping("/attack")
     public String executeAttack(@RequestParam String essid) {
         String attackId = UUID.randomUUID().toString();
-        commandExecutionService.executeAttack(essid, "src/main/java/com/uqac/wifi_attack/sourceCode/wordlist-top4800-probable.txt", attackId);
+        commandExecutionService.executeAttack(essid, "src/main/resources/wordlist-top4800-probable.txt", attackId);
         return "Attaque lancée avec ID: " + attackId;
     }
 
