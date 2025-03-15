@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # Afficher la valeur de $#
-echo "Nombre de paramètres: $#"
-
-# afficher les paramètres
-for i in "$@"
-do
-    echo "Paramètre: $i"
-done
+#echo "Nombre de paramètres: $#"
+#
+## afficher les paramètres
+#for i in "$@"
+#do
+#    echo "Paramètre: $i"
+#done
 
 # Vérifier si le nombre de paramètres est correct
 if [ "$#" -ne 2 ]; then
@@ -22,9 +22,9 @@ DICTIONARY_PATH=$2
 # Fonction pour désactiver le mode moniteur et réactiver le Wi-Fi
 cleanup() {
     echo "Désactivation du mode moniteur et réactivation du Wi-Fi..."
-    sudo airmon-ng stop wlp110s0f0mon
-    sudo service NetworkManager restart
-    sudo rm cracked.json
+    sudo airmon-ng stop wlp110s0f0mon 2>/dev/null
+    sudo service NetworkManager restart 2>/dev/null
+    sudo rm cracked.json 2>/dev/null
     exit 0
 }
 
@@ -51,15 +51,15 @@ run_wifite() {
 
 # Si wifite2 n'existe pas, cloner le dépôt
 if [ ! -d "wifite2" ]; then
-    git clone https://github.com/kimocoder/wifite2.git
+    git clone https://github.com/kimocoder/wifite2.git 2>/dev/null
     # build wifite2
     # shellcheck disable=SC2164
-    cd wifite2
-    python3 -m venv venv
-    source venv/bin/activate
-    pip install -r requirements.txt
+    cd wifite2 2>/dev/null
+    python3 -m venv venv 2>/dev/null
+    source venv/bin/activate 2>/dev/null
+    pip install -r requirements.txt 2>/dev/null
     # shellcheck disable=SC2103
-    cd ..
+    cd .. 2>/dev/null
 fi
 
 
