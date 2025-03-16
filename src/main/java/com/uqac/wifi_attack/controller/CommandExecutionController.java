@@ -1,10 +1,8 @@
 package com.uqac.wifi_attack.controller;
 
+import com.uqac.wifi_attack.dto.SubmitRequest;
 import com.uqac.wifi_attack.services.CommandExecutionService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -25,13 +23,13 @@ public class CommandExecutionController {
 
     /**
      * Lance une attaque de déauthentification sur un réseau WiFi pour récupérer le mot de passe
-     * @param essid Adresse MAC du point d'accès
-     *              (ex: 00:11:22:33:44:55)
+     * @param request Requête de soumission
+     *
      */
     @RequestMapping("/attack")
-    public String executeAttack(@RequestParam String essid) {
+    public String executeAttack(@RequestBody SubmitRequest request) {
         String attackId = UUID.randomUUID().toString();
-        commandExecutionService.executeAttack(essid, "src/main/resources/wordlist-top4800-probable.txt", attackId);
+        commandExecutionService.executeAttack(request, "src/main/resources/wordlist-top4800-probable.txt", attackId);
         return "Attaque lancée avec ID: " + attackId;
     }
 
