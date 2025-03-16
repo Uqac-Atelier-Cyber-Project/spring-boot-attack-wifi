@@ -32,6 +32,9 @@ public class CommandExecutionService {
      */
     @Async
     public void executeAttack(SubmitRequest request, String wordlistPath, String scanId) {
+
+        logger.info( "Executing wifi attack with ID: {}", scanId);
+
         StringBuilder logBuilder = new StringBuilder();
         scanStatus.put(scanId, "IN_PROGRESS");
 
