@@ -66,6 +66,7 @@ public class CommandExecutionService {
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
+                    line = line.replaceAll("[^\\p{ASCII}\\p{Alnum}]", " ");
                     logBuilder.append(line).append("\n");
                     logger.info(line);
                 }
