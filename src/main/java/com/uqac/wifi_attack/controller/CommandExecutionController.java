@@ -29,7 +29,7 @@ public class CommandExecutionController {
     @RequestMapping("/attack")
     public String executeAttack(@RequestBody SubmitRequest request) {
         String attackId = UUID.randomUUID().toString();
-        commandExecutionService.executeAttack(request, "src/main/resources/wordlist-top4800-probable.txt", attackId);
+        commandExecutionService.executeAttack(request, attackId);
         return "Attaque lancée avec ID: " + attackId;
     }
 
