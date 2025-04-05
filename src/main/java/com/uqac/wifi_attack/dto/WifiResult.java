@@ -3,7 +3,6 @@ package com.uqac.wifi_attack.dto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter
@@ -14,7 +13,7 @@ public class WifiResult {
     private String accessPointName;
     private String accessPointBSSID;
     private String encryption;
-    private String handshakeFile;
+    private String extraInformation;
     private String psk;
 
     @Override
@@ -25,7 +24,7 @@ public class WifiResult {
                 ", accessPointName='" + accessPointName + '\'' +
                 ", accessPointBSSID='" + accessPointBSSID + '\'' +
                 ", encryption='" + encryption + '\'' +
-                ", handshakeFile='" + handshakeFile + '\'' +
+                ", extraInformation='" + extraInformation + '\'' +
                 ", psk='" + psk + '\'' +
                 '}';
     }
